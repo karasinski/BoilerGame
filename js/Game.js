@@ -11,7 +11,7 @@ BoilerGame.Game.prototype = {
     this.game.physics.arcade.gravity.y = 1200;
 
     // Add a scrolling ground
-    this.ground = this.game.add.tileSprite(0, 250, 480, 70, 'ground');
+    this.ground = this.game.add.tileSprite(0, 640-50, 960, 70, 'ground');
     this.game.physics.arcade.enableBody(this.ground);
     this.ground.body.immovable = true;
     this.ground.body.allowGravity = false;
@@ -140,7 +140,7 @@ var PausePanel = function(game, parent) {
   Phaser.Group.call(this, game, parent);
 
   // Add the panel
-  this.panel = this.create(this.game.width / 2, 10, 'panel');
+  this.panel = this.create(this.game.width / 4, 10, 'panel');
   this.panel.anchor.setTo(0.5, 0);
 
   // Add text

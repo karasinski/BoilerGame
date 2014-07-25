@@ -22,7 +22,7 @@ BoilerGame.Preloader.prototype = {
     this.load.image('title', 'assets/title.png');
     // load spritesheets
     this.load.spritesheet('hero', 'assets/hero.png', 70, 94, 11);
-    this.load.spritesheet('button-start', 'assets/button-start.png', 401, 143);
+    this.load.spritesheet('button-start', 'assets/button-start.png', 504, 135);
     // load fonts
     this.load.bitmapFont('kenpixelblocks',
                          'assets/fonts/kenpixelblocks/kenpixelblocks.png',
