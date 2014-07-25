@@ -26,6 +26,23 @@
 	<body>
 		<div id="game"></div>
 		<script src="js/lib/phaser.min.js"></script>
+		<script src="js/boot.js"></script> 
+		<script src="js/preloader.js"></script> 
+    <script src="js/mainmenu.js"></script>
 		<script src="js/game.js"></script>
+<script>
+(function() {
+	// initialize the framework
+	var game = new Phaser.Game(480, 320, Phaser.AUTO, 'game');
+	// add game states
+	game.state.add('Boot', Game.Boot);
+	game.state.add('Preloader', Game.Preloader);
+	game.state.add('MainMenu', Game.MainMenu);
+	game.state.add('Game', Game.Game);
+	// start the Boot state
+	game.state.start('Boot');
+})();
+</script>
+
 	</body>
 </html>
