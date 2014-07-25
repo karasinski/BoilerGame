@@ -1,11 +1,14 @@
-var Game = {};
-Game.Boot = function(game){};
-Game.Boot.prototype = {
-  preload: function(){
+var BoilerGame = {};
+
+BoilerGame.Boot = function(game) {};
+
+BoilerGame.Boot.prototype = {
+  preload: function() {
     // preload the loading indicator first before anything else
     this.load.image('preloaderBar', 'assets/loading-bar.png');
   },
-  create: function(){
+
+  create: function() {
     // Reponsive and centered canvas
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
@@ -16,12 +19,11 @@ Game.Boot.prototype = {
 
     this.scale.pageAlignHorizontally = true;
     this.scale.pageAlignVertically = true;
-
     this.scale.setScreenSize(true);
 
     // Change stage background color
     this.game.stage.backgroundColor = '#d0f4f7';
-    
+
     // start the Preloader state
     this.state.start('Preloader');
   }
