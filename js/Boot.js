@@ -22,7 +22,7 @@ BoilerGame.Boot.prototype = {
     this.scale.setScreenSize(true);
 
     // Change stage background color
-    this.game.stage.backgroundColor = '#d0f4f7';
+    this.game.stage.backgroundColor = '#333';
 
     // start the Preloader state
     this.state.start('Preloader');
