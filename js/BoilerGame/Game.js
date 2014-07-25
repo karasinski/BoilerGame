@@ -34,15 +34,6 @@ BoilerGame.Game.prototype = {
     this.game.physics.arcade.collide(this.hero, this.ground);
   },
 
-  heroJump: function() {
-    if (!paused) {
-      // Change hero velocity if touching the ground
-      if (this.body.touching.down) {
-        this.body.velocity.y -= 500;
-      }
-    }
-  },
-
   pauseGame: function() {
     if (!paused) {
       // Enter pause
@@ -90,81 +81,88 @@ BoilerGame.Game.prototype = {
 };
 
 BoilerGame.ground = {
-  create: function(BoilerGame) {
+  create: function(that) {
     // Add a scrolling ground
-    BoilerGame.ground = BoilerGame.game.add.tileSprite(0, 640-50, 960, 70, 'ground');
-    BoilerGame.game.physics.arcade.enableBody(BoilerGame.ground);
-    BoilerGame.ground.body.immovable = true;
-    BoilerGame.ground.body.allowGravity = false;
+    that.ground = that.game.add.tileSprite(0, 640-50, 960, 70, 'ground');
+    that.game.physics.arcade.enableBody(that.ground);
+    that.ground.body.immovable = true;
+    that.ground.body.allowGravity = false;
   }
 };
 
 BoilerGame.clouds = {
-  create: function(BoilerGame) {
-
+  create: function(that) {
     // Add some moving clouds
-    BoilerGame.clouds = BoilerGame.game.add.group();
+    that.clouds = that.game.add.group();
     for (var i = 0; i < 3; i++) {
-      var cloud = BoilerGame.game.add.sprite(
-        BoilerGame.game.rnd.integerInRange(0, BoilerGame.game.width), 
-        BoilerGame.game.rnd.integerInRange(0, 50), 
+      var cloud = that.game.add.sprite(
+        that.game.rnd.integerInRange(0, that.game.width), 
+        that.game.rnd.integerInRange(0, 50), 
         'cloud');
 
       cloud.anchor.setTo(0.5, 0);
-      BoilerGame.clouds.add(cloud);
+      that.clouds.add(cloud);
 
       // Kill the cloud when out of bounds
       cloud.checkWorldBounds = true;
       cloud.outOfBoundsKill = true;
 
       // Move clouds
-      BoilerGame.game.physics.arcade.enableBody(cloud);
+      that.game.physics.arcade.enableBody(cloud);
       cloud.body.allowGravity = false;
-      cloud.body.velocity.x = -BoilerGame.game.rnd.integerInRange(15, 30);
+      cloud.body.velocity.x = -that.game.rnd.integerInRange(15, 30);
     }
   }
 };
 
 BoilerGame.hero = {
-  create: function(BoilerGame) {
-
+  create: function(that) {
     // Add hero
-    BoilerGame.hero = BoilerGame.game.add.sprite(180, 160, 'hero');
-    BoilerGame.hero.anchor.setTo(0.5, 0.5);
-    BoilerGame.hero.animations.add('run');
-    BoilerGame.hero.animations.play('run', 20, true);
-    BoilerGame.heroVelocityY = 0;
+    that.hero = that.game.add.sprite(180, 160, 'hero');
+    that.hero.anchor.setTo(0.5, 0.5);
+    that.hero.animations.add('run');
+    that.hero.animations.play('run', 20, true);
+    that.heroVelocityY = 0;
 
     // Animation loop on the hero
-    BoilerGame.heroTween = BoilerGame.game.add.tween(BoilerGame.hero).to({
+    that.heroTween = that.game.add.tween(that.hero).to({
       x: 360
     }, 2500, Phaser.Easing.Linear.NONE, true, 0, Number.POSITIVE_INFINITY, true);
-    BoilerGame.heroTween.pause();
+    that.heroTween.pause();
 
     // Allow hero to jump (Spacebar and mouse/touch)
-    BoilerGame.jumpKey = BoilerGame.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    BoilerGame.jumpKey.onDown.add(BoilerGame.heroJump, BoilerGame.hero);
-  }
+    that.jumpKey = that.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    that.jumpKey.onDown.add(this.jump, that.hero);
+  },
+
+  jump: function() {
+    if (!paused) {
+      // Change hero velocity if touching the ground
+      if (this.body.touching.down) {
+        this.body.velocity.y -= 500;
+      }
+    }
+  },
 };
 
 BoilerGame.touchArea = {
-  create: function(BoilerGame) {
+  create: function(that) {
     // Create touch area
-    BoilerGame.touchArea = BoilerGame.game.add.sprite(0, 0);
-    BoilerGame.touchArea.width = BoilerGame.game.width;
-    BoilerGame.touchArea.height = BoilerGame.game.height;
-    BoilerGame.touchArea.inputEnabled = true;
-    BoilerGame.touchArea.events.onInputDown.add(BoilerGame.heroJump, BoilerGame.hero);
+    that.touchArea = that.game.add.sprite(0, 0);
+    that.touchArea.width = that.game.width;
+    that.touchArea.height = that.game.height;
+    that.touchArea.inputEnabled = true;
+    that.touchArea.events.onInputDown.add(BoilerGame.hero.jump, that.hero);
   }
 };
 
 BoilerGame.UI = {
-  create: function(BoilerGame) {
+  create: function(that) {
     // Add a pause button
-    BoilerGame.btnPause = BoilerGame.game.add.button(20, 20, 'btnPause', BoilerGame.pauseGame, BoilerGame);
+    that.btnPause = that.game.add.button(20, 20, 'btnPause', that.pauseGame, that);
 
     // Let's build a pause panel
-    BoilerGame.pausePanel = new PausePanel(BoilerGame.game);
-    BoilerGame.game.add.existing(BoilerGame.pausePanel);
+    that.pausePanel = new PausePanel(that.game);
+    that.game.add.existing(that.pausePanel);
   }
 };
