@@ -10,7 +10,7 @@ BoilerGame.MainMenu.prototype = {
     start_x = BoilerGame.GAME_WIDTH / 2 + 250;
     start_y = BoilerGame.GAME_HEIGHT / 2 - 50;
     start_button = this.add.button(start_x, start_y, 
-                                   'start', this.startGame, this, 0, 1, 2);
+                                   'btnStart', this.startGame, this, 0, 1, 2);
     // start_button.scale.setTo(2,2);
   },
 

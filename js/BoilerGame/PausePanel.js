@@ -13,6 +13,14 @@ var PausePanel = function(game, parent) {
   this.cloudsText = this.game.add.bitmapText(100, 50, 'kenpixelblocks', 'Clouds are still moving :)', 16);
   this.add(this.cloudsText);
 
+  returnToMenu = function() {
+    // start the menu state
+    this.game.state.start('MainMenu');
+  }
+
+  this.backButton = this.game.add.button(410, 20, 'btnExit', returnToMenu, this, 0, 1, 2);
+  this.add(this.backButton)
+
   // Add play button
   this.btnPlay = this.game.add.button(20, 20, 'btnPlay', function() {
     this.game.state.getCurrentState().playGame()

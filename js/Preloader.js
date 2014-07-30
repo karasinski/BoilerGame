@@ -19,12 +19,13 @@ BoilerGame.Preloader.prototype = {
     this.load.image('background', 'assets/background.png');
     this.load.image('btnPause',   'assets/UI/btn-pause.png');
     this.load.image('btnPlay',    'assets/UI/btn-play.png');
+    this.load.image('btnExit',    'assets/UI/btn-exit.png');
     this.load.image('panel',      'assets/UI/panel.png');
     this.load.image('title',      'assets/UI/title.png');
 
     // load spritesheets
     this.load.spritesheet('hero',  'assets/hero.png', 70, 94, 11);
-    this.load.spritesheet('start', 'assets/UI/btn-start.png', 190, 49, 3);
+    this.load.spritesheet('btnStart', 'assets/UI/btn-start.png', 190, 49, 3);
 
     // load fonts
     this.load.bitmapFont('kenpixelblocks',
