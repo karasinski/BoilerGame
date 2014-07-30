@@ -19,6 +19,9 @@ BoilerGame.Game.prototype = {
     BoilerGame.touchArea.create(this);
     BoilerGame.UI.create(this);
 
+    // Reset the stats.
+    BoilerGame.stats.create(this);
+
     // Enter play mode
     this.playGame();
   },
@@ -140,6 +143,10 @@ BoilerGame.hero = {
       // Change hero velocity if touching the ground
       if (this.body.touching.down) {
         this.body.velocity.y -= 500;
+
+        // Increase score (they worked very hard)
+        BoilerGame.stats.score += 1;
+        BoilerGame.stats.update();
       }
     }
   },
@@ -164,5 +171,28 @@ BoilerGame.UI = {
     // Let's build a pause panel
     that.pausePanel = new PausePanel(that.game);
     that.game.add.existing(that.pausePanel);
+  }
+};
+
+BoilerGame.stats = {
+  score : 0,
+
+  create: function(that) {
+    this.score = 0;
+
+    this.scoreText = that.game.add.text(
+            that.game.width - 125, 25,
+            "",
+            {
+                size: "32px",
+                fill: "#333",
+                align: "center"
+            })
+
+    this.update();
+  },
+
+  update: function() {
+    this.scoreText.setText("SCORE\n"+this.score);
   }
 };
