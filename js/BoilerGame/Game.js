@@ -136,6 +136,10 @@ BoilerGame.hero = {
     // Allow hero to jump (Spacebar and mouse/touch)
     that.jumpKey = that.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     that.jumpKey.onDown.add(this.jump, that.hero);
+
+    // Temporarily use the UP key to save
+    that.saveKey = that.input.keyboard.addKey(Phaser.Keyboard.UP)
+    that.saveKey.onDown.add(BoilerGame.stats.save, BoilerGame.stats)
   },
 
   jump: function() {
@@ -149,7 +153,7 @@ BoilerGame.hero = {
         BoilerGame.stats.update();
       }
     }
-  },
+  }
 };
 
 BoilerGame.touchArea = {
@@ -194,5 +198,40 @@ BoilerGame.stats = {
 
   update: function() {
     this.scoreText.setText("SCORE\n"+this.score);
+  },
+
+  save: function() {
+    if (typeof(Storage) !== 'undefined') {
+      // Save the score
+      try {
+        localStorage.setItem(BoilerGame.NAME, this.score);
+      } catch (e) {
+        console.log('error', e)
+      }
+    }
+
+    this.review();
+  },
+
+  review: function() {
+    // Check saves in local storage
+    saves = [];
+    for (var i = 0; i < localStorage.length; i++) {
+      keyName = localStorage.key(i)
+      if (keyName.split('-')[0] == 'BoilerGame') {
+        date = keyName.split('-')[1];
+        score = localStorage.getItem(keyName);
+        save = {
+          date: date,
+          score: score
+        }
+        saves.push(save);
+      }
+    }
+
+    // Sort the saves so that the highest score comes first
+    saves = saves.sort(function(a, b) {return b.score - a.score}); 
+    console.log(saves)
   }
+
 };

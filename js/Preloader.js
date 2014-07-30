@@ -2,6 +2,7 @@ BoilerGame.Preloader = function(game) {
   // define width and height of the game
   BoilerGame.GAME_WIDTH = 720;
   BoilerGame.GAME_HEIGHT = 480;
+  BoilerGame.NAME = "";
 };
 
 BoilerGame.Preloader.prototype = {
