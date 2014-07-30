@@ -86,7 +86,7 @@ BoilerGame.Game.prototype = {
 BoilerGame.ground = {
   create: function(that) {
     // Add a scrolling ground
-    that.ground = that.game.add.tileSprite(0, 640-50, 960, 70, 'ground');
+    that.ground = that.game.add.tileSprite(0, 640 - 50, 960, 70, 'ground');
     that.game.physics.arcade.enableBody(that.ground);
     that.ground.body.immovable = true;
     that.ground.body.allowGravity = false;
@@ -99,8 +99,8 @@ BoilerGame.clouds = {
     that.clouds = that.game.add.group();
     for (var i = 0; i < 6; i++) {
       var cloud = that.game.add.sprite(
-        that.game.rnd.integerInRange(0, that.game.width), 
-        that.game.rnd.integerInRange(0, 50), 
+        that.game.rnd.integerInRange(0, that.game.width),
+        that.game.rnd.integerInRange(0, 50),
         'cloud');
 
       cloud.anchor.setTo(0.5, 0);
@@ -179,25 +179,24 @@ BoilerGame.UI = {
 };
 
 BoilerGame.stats = {
-  score : 0,
+  score: 0,
 
   create: function(that) {
     this.score = 0;
 
     this.scoreText = that.game.add.text(
-            that.game.width - 125, 25,
-            "",
-            {
-                size: "32px",
-                fill: "#333",
-                align: "center"
-            })
+      that.game.width - 125, 25,
+      "", {
+        size: "32px",
+        fill: "#333",
+        align: "center"
+      })
 
     this.update();
   },
 
   update: function() {
-    this.scoreText.setText("SCORE\n"+this.score);
+    this.scoreText.setText("SCORE\n" + this.score);
   },
 
   save: function() {
@@ -230,7 +229,9 @@ BoilerGame.stats = {
     }
 
     // Sort the saves so that the highest score comes first
-    saves = saves.sort(function(a, b) {return b.score - a.score}); 
+    saves = saves.sort(function(a, b) {
+      return b.score - a.score
+    });
     console.log(saves)
   }
 

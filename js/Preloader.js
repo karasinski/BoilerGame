@@ -10,8 +10,8 @@ BoilerGame.Preloader.prototype = {
     // set background color and preload image
     this.stage.backgroundColor = '#B4D9E7';
     this.preloadBar = this.add.sprite(BoilerGame.GAME_WIDTH / 2,
-      BoilerGame.GAME_HEIGHT / 2,
-      'preloaderBar');
+                                      BoilerGame.GAME_HEIGHT / 2,
+                                      'preloaderBar');
     this.load.setPreloadSprite(this.preloadBar);
 
     // load images
