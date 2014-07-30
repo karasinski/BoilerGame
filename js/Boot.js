@@ -5,7 +5,7 @@ BoilerGame.Boot = function(game) {};
 BoilerGame.Boot.prototype = {
   preload: function() {
     // preload the loading indicator first before anything else
-    this.load.image('preloaderBar', 'assets/loading-bar.png');
+    this.load.image('preloaderBar', 'assets/UI/loading-bar.png');
   },
 
   create: function() {

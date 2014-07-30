@@ -94,7 +94,7 @@ BoilerGame.clouds = {
   create: function(that) {
     // Add some moving clouds
     that.clouds = that.game.add.group();
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 6; i++) {
       var cloud = that.game.add.sprite(
         that.game.rnd.integerInRange(0, that.game.width), 
         that.game.rnd.integerInRange(0, 50), 
