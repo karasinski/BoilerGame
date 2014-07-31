@@ -11,11 +11,18 @@ BoilerGame.MainMenu.prototype = {
     start_y = BoilerGame.GAME_HEIGHT / 2 - 50;
     start_button = this.add.button(start_x, start_y, 
                                    'btnStart', this.startGame, this, 0, 1, 2);
+
+    start_button = this.add.button(start_x, start_y + 75,
+                                   'btnStart', this.showLeaderboard, this, 0, 1, 2);
   },
 
   startGame: function() {
     // start the Game state
     BoilerGame.NAME = "BoilerGame-" + Date.now();
     this.state.start('Game');
+  },
+
+  showLeaderboard: function() {
+    this.state.start('Leaderboard');
   }
 };

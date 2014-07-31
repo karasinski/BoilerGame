@@ -6,6 +6,9 @@ BoilerGame.Game = function(game) {};
 
 BoilerGame.Game.prototype = {
   create: function() {
+    // Set background color
+    this.game.stage.backgroundColor = '#B4D9E7';
+
     // Enable arcade physics
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.physics.arcade.gravity.y = 1200;
@@ -176,63 +179,4 @@ BoilerGame.UI = {
     that.pausePanel = new PausePanel(that.game);
     that.game.add.existing(that.pausePanel);
   }
-};
-
-BoilerGame.stats = {
-  score: 0,
-
-  create: function(that) {
-    this.score = 0;
-
-    this.scoreText = that.game.add.text(
-      that.game.width - 125, 25,
-      "", {
-        size: "32px",
-        fill: "#333",
-        align: "center"
-      })
-
-    this.update();
-  },
-
-  update: function() {
-    this.scoreText.setText("SCORE\n" + this.score);
-  },
-
-  save: function() {
-    if (typeof(Storage) !== 'undefined') {
-      // Save the score
-      try {
-        localStorage.setItem(BoilerGame.NAME, this.score);
-      } catch (e) {
-        console.log('error', e)
-      }
-    }
-
-    this.review();
-  },
-
-  review: function() {
-    // Check saves in local storage
-    saves = [];
-    for (var i = 0; i < localStorage.length; i++) {
-      keyName = localStorage.key(i)
-      if (keyName.split('-')[0] == 'BoilerGame') {
-        date = keyName.split('-')[1];
-        score = localStorage.getItem(keyName);
-        save = {
-          date: date,
-          score: score
-        }
-        saves.push(save);
-      }
-    }
-
-    // Sort the saves so that the highest score comes first
-    saves = saves.sort(function(a, b) {
-      return b.score - a.score
-    });
-    console.log(saves)
-  }
-
 };

@@ -27,12 +27,17 @@
 
 <body>
   <div id="game"></div>
+
   <script src="js/lib/phaser.min.js"></script>
+
   <script src="js/Boot.js"></script>
   <script src="js/Preloader.js"></script>
   <script src="js/MainMenu.js"></script>
+  <script src="js/Leaderboard.js"></script>
+
   <script src="js/BoilerGame/Game.js"></script>
   <script src="js/BoilerGame/PausePanel.js"></script>
+
   <script>
     (function() {
       // initialize the framework
@@ -41,6 +46,7 @@
       game.state.add('Boot', BoilerGame.Boot);
       game.state.add('Preloader', BoilerGame.Preloader);
       game.state.add('MainMenu', BoilerGame.MainMenu);
+      game.state.add('Leaderboard', BoilerGame.Leaderboard);
       game.state.add('Game', BoilerGame.Game);
       // start the Boot state
       game.state.start('Boot');
