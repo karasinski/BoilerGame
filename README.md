@@ -11,3 +11,12 @@ $ http-server
 ```
 
 You can then navigate to [http://localhost:8080/](http://localhost:8080/) in your favorite web browser.
+
+Todo
+------
+
++ Style the leaderboard
++ Add an 'instructions' tab on main menu
++ Write an instructions state (text with back button)
++ Find a better way to do buttons (need to draw the text on the button)
++ Add additional comments in code
