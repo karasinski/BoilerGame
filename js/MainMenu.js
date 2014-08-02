@@ -13,7 +13,7 @@ BoilerGame.MainMenu.prototype = {
                                    'btnStart', this.startGame, this, 0, 1, 2);
 
     start_button = this.add.button(start_x, start_y + 75,
-                                   'btnStart', this.showLeaderboard, this, 0, 1, 2);
+                                   'btnLeaderboard', this.showLeaderboard, this, 0, 1, 2);
   },
 
   startGame: function() {
