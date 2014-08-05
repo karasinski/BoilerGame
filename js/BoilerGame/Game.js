@@ -9,6 +9,13 @@ BoilerGame.Game.prototype = {
     // Set background color
     this.game.stage.backgroundColor = '#B4D9E7';
 
+    // Add pause function
+    this.game.onPause.add(function() {
+      this.pauseGame();
+    }, this);
+    // and resume, which is nothing for now.
+    // this.game.onResume.add(function(){}, this);
+
     // Enable arcade physics
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.physics.arcade.gravity.y = 1200;
@@ -188,8 +195,6 @@ BoilerGame.UI = {
 BoilerGame.timer = {
   secs: 0,
   counter: 0,
-  // Some redundancy here... should use global paused variable.
-  not_counting: true,
 
   set: function(secs) {
     this.secs = secs;
@@ -217,12 +222,10 @@ BoilerGame.timer = {
   },
 
   pause: function() {
-    if (!this.not_counting) {
-      this.not_counting = true;
+    if (paused) {
       clearTimeout(this.counter);
       this.counter = 0;
     } else {
-      this.not_counting = false;
       clearTimeout(this.counter);
       this.countdown();
     }
