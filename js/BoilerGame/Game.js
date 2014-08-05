@@ -22,8 +22,10 @@ BoilerGame.Game.prototype = {
     BoilerGame.touchArea.create(this);
     BoilerGame.UI.create(this);
 
-    // Reset the stats.
+    // Reset the stats, start countdown.
     BoilerGame.stats.create(this);
+    BoilerGame.timer.set(10);
+    BoilerGame.timer.countdown();
 
     // Enter play mode
     this.playGame();
@@ -45,6 +47,7 @@ BoilerGame.Game.prototype = {
       // Enter pause
       paused = true;
       this.pausePanel.show();
+      BoilerGame.timer.pause();
 
       // Stop auto scrolling
       this.ground.autoScroll(0, 0);
@@ -68,6 +71,7 @@ BoilerGame.Game.prototype = {
       // Leaving pause
       paused = false;
       this.pausePanel.hide();
+      BoilerGame.timer.pause();
 
       // Anim ground
       this.ground.autoScroll(-100, 0);
@@ -139,10 +143,6 @@ BoilerGame.hero = {
     // Allow hero to jump (Spacebar and mouse/touch)
     that.jumpKey = that.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     that.jumpKey.onDown.add(this.jump, that.hero);
-
-    // Temporarily use the UP key to save
-    that.saveKey = that.input.keyboard.addKey(Phaser.Keyboard.UP)
-    that.saveKey.onDown.add(BoilerGame.stats.save, BoilerGame.stats)
   },
 
   jump: function() {
@@ -154,6 +154,9 @@ BoilerGame.hero = {
         // Increase score (they worked very hard)
         BoilerGame.stats.score += 1;
         BoilerGame.stats.update();
+
+        // Save your score
+        BoilerGame.stats.save();
       }
     }
   }
@@ -178,5 +181,50 @@ BoilerGame.UI = {
     // Let's build a pause panel
     that.pausePanel = new PausePanel(that.game);
     that.game.add.existing(that.pausePanel);
+  }
+};
+
+// Timer doesn't pause when the game loses focus, but so it goes.
+BoilerGame.timer = {
+  secs: 0,
+  counter: 0,
+  // Some redundancy here... should use global paused variable.
+  not_counting: true,
+
+  set: function(secs) {
+    this.secs = secs;
+  },
+
+  countdown: function() {
+    // If the timer hasn't expired already...
+    if (this.secs > 0) {
+      // Create a new timeout
+      this.counter = setTimeout(function() {
+        BoilerGame.timer.decrement();
+      }, 1000);
+    }
+  },
+
+  decrement: function() {
+    // Remove one off of seconds, end or continue countdown.
+    this.secs--;
+    console.log(this.secs);
+    if (this.secs == 0) {
+      alert('done')
+    } else {
+      this.countdown();
+    }
+  },
+
+  pause: function() {
+    if (!this.not_counting) {
+      this.not_counting = true;
+      clearTimeout(this.counter);
+      this.counter = 0;
+    } else {
+      this.not_counting = false;
+      clearTimeout(this.counter);
+      this.countdown();
+    }
   }
 };
