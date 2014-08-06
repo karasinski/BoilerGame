@@ -34,6 +34,7 @@
   <script src="js/Preloader.js"></script>
   <script src="js/MainMenu.js"></script>
   <script src="js/Leaderboard.js"></script>
+  <script src="js/Instructions.js"></script>
 
   <script src="js/BoilerGame/Game.js"></script>
   <script src="js/BoilerGame/UI.js"></script>
@@ -47,12 +48,12 @@
       game.state.add('Preloader', BoilerGame.Preloader);
       game.state.add('MainMenu', BoilerGame.MainMenu);
       game.state.add('Leaderboard', BoilerGame.Leaderboard);
+      game.state.add('Instructions', BoilerGame.Instructions);
       game.state.add('Game', BoilerGame.Game);
       // start the Boot state
       game.state.start('Boot');
     })();
   </script>
-
 </body>
 
 </html>

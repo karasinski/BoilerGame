@@ -195,17 +195,6 @@ BoilerGame.touchArea = {
   }
 };
 
-BoilerGame.UI = {
-  create: function(that) {
-    // Add a pause button
-    that.btnPause = that.game.add.button(20, 20, 'btnPause', that.pauseGame, that);
-
-    // Let's build a pause panel
-    that.pausePanel = new PausePanel(that.game);
-    that.game.add.existing(that.pausePanel);
-  }
-};
-
 BoilerGame.timer = {
   secs: 0,
   counter: 0,
@@ -247,18 +236,18 @@ BoilerGame.timer = {
   decrement: function() {
     // Remove one off of seconds, end or continue countdown.
     this.secs--;
-    console.log(this.secs);
+    // console.log(this.secs);
     if (this.secs != 0) {
       this.countdown();
     }
   },
 
   pause: function() {
+    clearTimeout(this.counter);
+
     if (paused) {
-      clearTimeout(this.counter);
       this.counter = 0;
     } else {
-      clearTimeout(this.counter);
       this.countdown();
     }
   }

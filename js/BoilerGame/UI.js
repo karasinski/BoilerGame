@@ -1,3 +1,14 @@
+BoilerGame.UI = {
+  create: function(that) {
+    // Add a pause button
+    that.btnPause = that.game.add.button(20, 20, 'btnPause', that.pauseGame, that);
+
+    // Let's build a pause panel
+    that.pausePanel = new PausePanel(that.game);
+    that.game.add.existing(that.pausePanel);
+  }
+};
+
 // Create our pause panel extending Phaser.Group
 var PausePanel = function(game, parent) {
   // Super call to Phaser.Group
