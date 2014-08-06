@@ -22,6 +22,7 @@ BoilerGame.Preloader.prototype = {
     this.load.image('btnPlay',    'assets/UI/btn-play.png');
     this.load.image('btnExit',    'assets/UI/btn-exit.png');
     this.load.image('panel',      'assets/UI/panel.png');
+    this.load.image('box',        'assets/UI/box.png');
     this.load.image('title',      'assets/UI/title.png');
 
     // load spritesheets
