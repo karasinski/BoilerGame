@@ -57,15 +57,15 @@ var GameOverPanel = function(game, parent) {
   this.panel.scale.setTo(4, 4);
 
   // Add text
-  this.gameOverText = this.game.add.bitmapText(315, -150, 'kenpixelblocks', 'Game Over', 50);
+  this.gameOverText = this.game.add.bitmapText(315, -170, 'kenpixelblocks', 'Game Over', 50);
   this.add(this.gameOverText);
 
-  yourScoreString = "You got a \ngrand total of \n\n\npoints!"
-  this.yourScoreText = this.game.add.bitmapText(315, -50, 'kenpixelblocks', yourScoreString, 30);
+  yourScoreString = "You got a \ngrand total of \n\n\npoints! Bravo!"
+  this.yourScoreText = this.game.add.bitmapText(330, -90, 'kenpixelblocks', yourScoreString, 30);
   this.yourScoreText.align = 'center';
   this.add(this.yourScoreText);
 
-  this.yourPointsText = this.game.add.text(450, 40, BoilerGame.stats.score.toString(), {font: "65px Arial"});
+  this.yourPointsText = this.game.add.text(460, 0, BoilerGame.stats.score.toString(), {font: "65px Arial"});
   this.add(this.yourPointsText);
 
   tryAgain = function() {
@@ -76,11 +76,21 @@ var GameOverPanel = function(game, parent) {
     this.game.state.start('Leaderboard');
   }
 
-  this.backButton = this.game.add.button(300, 100, 'btnExit', tryAgain, this, 0, 1, 2);
+  this.backButton = this.game.add.button(310, 135, 'box', tryAgain, this);
+  this.backButton.scale.setTo(1.5, 0.5);
   this.add(this.backButton)
 
-  this.leaderboardButton = this.game.add.button(600, 100, 'btnExit', returnToLeaderboard, this, 0, 1, 2);
+  tryAgainString = "Try Again"
+  this.tryAgainText = this.game.add.bitmapText(320, 150, 'kenpixelblocks', tryAgainString, 20);
+  this.add(this.tryAgainText);
+
+  this.leaderboardButton = this.game.add.button(500, 135, 'box', returnToLeaderboard, this);
+  this.leaderboardButton.scale.setTo(1.5, 0.5);
   this.add(this.leaderboardButton)
+
+  leaderboardString = "Leader\n         board"
+  this.leaderboardText = this.game.add.bitmapText(520, 137, 'kenpixelblocks', leaderboardString, 18);
+  this.add(this.leaderboardText);
 
   // Place it out of bounds
   this.x = 0;

@@ -18,5 +18,4 @@ Todo
 + Style the leaderboard
 + Add an 'instructions' tab on main menu
 + Write an instructions state (text with back button)
-+ Find a better way to do buttons (need to draw the text on the button)
 + Add additional comments in code

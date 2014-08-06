@@ -31,7 +31,7 @@ BoilerGame.Game.prototype = {
 
     // Reset the stats, start countdown.
     BoilerGame.stats.create(this);
-    BoilerGame.timer.create(this);
+    BoilerGame.timer.create(this, 10);
 
     // Enter play mode
     this.playGame();
@@ -73,6 +73,10 @@ BoilerGame.Game.prototype = {
   },
 
   endGame: function() {
+    // Let's build a game over panel
+    this.gameOverPanel = new GameOverPanel(this.game);
+    this.game.add.existing(this.gameOverPanel);
+
     this.gameOverPanel.show();
     this.pause();
   },
@@ -199,10 +203,6 @@ BoilerGame.UI = {
     // Let's build a pause panel
     that.pausePanel = new PausePanel(that.game);
     that.game.add.existing(that.pausePanel);
-
-    // Let's build a game over panel
-    that.gameOverPanel = new GameOverPanel(that.game);
-    that.game.add.existing(that.gameOverPanel);
   }
 };
 
@@ -223,10 +223,10 @@ BoilerGame.timer = {
     return done
   },
 
-  create: function(that) {
+  create: function(that, time) {
     that.timer = BoilerGame.timer;
     that.timer.once = false;
-    that.timer.set(3);
+    that.timer.set(time);
     that.timer.countdown();
   },
 
