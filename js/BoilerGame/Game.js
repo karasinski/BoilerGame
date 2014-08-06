@@ -31,8 +31,7 @@ BoilerGame.Game.prototype = {
 
     // Reset the stats, start countdown.
     BoilerGame.stats.create(this);
-    BoilerGame.timer.set(10);
-    BoilerGame.timer.countdown();
+    BoilerGame.timer.create(this);
 
     // Enter play mode
     this.playGame();
@@ -47,29 +46,41 @@ BoilerGame.Game.prototype = {
 
     // Collisions between hero and ground
     this.game.physics.arcade.collide(this.hero, this.ground);
+
+    // Check for end game (would prefer to do this differently)
+    if (this.timer.done()) this.endGame();
+  },
+
+  pause: function() {
+    // Enter pause
+    paused = true;
+    BoilerGame.timer.pause();
+
+    // Stop auto scrolling
+    this.ground.autoScroll(0, 0);
+
+    // Stop the hero
+    this.hero.animations.currentAnim.paused = true;
+
+    // Save the velocity of the hero before killing the body
+    this.heroVelocityY = this.hero.body.velocity.y;
+
+    // Kill the body
+    this.hero.body = null;
+
+    // Launch the tween
+    this.heroTween.pause();
+  },
+
+  endGame: function() {
+    this.gameOverPanel.show();
+    this.pause();
   },
 
   pauseGame: function() {
     if (!paused) {
-      // Enter pause
-      paused = true;
       this.pausePanel.show();
-      BoilerGame.timer.pause();
-
-      // Stop auto scrolling
-      this.ground.autoScroll(0, 0);
-
-      // Stop the hero
-      this.hero.animations.currentAnim.paused = true;
-
-      // Save the velocity of the hero before killing the body
-      this.heroVelocityY = this.hero.body.velocity.y;
-
-      // Kill the body
-      this.hero.body = null;
-
-      // Launch the tween
-      this.heroTween.pause();
+      this.pause();
     }
   },
 
@@ -188,13 +199,36 @@ BoilerGame.UI = {
     // Let's build a pause panel
     that.pausePanel = new PausePanel(that.game);
     that.game.add.existing(that.pausePanel);
+
+    // Let's build a game over panel
+    that.gameOverPanel = new GameOverPanel(that.game);
+    that.game.add.existing(that.gameOverPanel);
   }
 };
 
-// Timer doesn't pause when the game loses focus, but so it goes.
 BoilerGame.timer = {
   secs: 0,
   counter: 0,
+  once: false,
+
+  done: function() {
+    // You can only be done once.
+    done = false;
+
+    if (this.secs == 0 && this.once == false) {
+      this.once = true;
+      done = true;
+    }
+
+    return done
+  },
+
+  create: function(that) {
+    that.timer = BoilerGame.timer;
+    that.timer.once = false;
+    that.timer.set(3);
+    that.timer.countdown();
+  },
 
   set: function(secs) {
     this.secs = secs;
@@ -214,9 +248,7 @@ BoilerGame.timer = {
     // Remove one off of seconds, end or continue countdown.
     this.secs--;
     console.log(this.secs);
-    if (this.secs == 0) {
-      alert('done')
-    } else {
+    if (this.secs != 0) {
       this.countdown();
     }
   },
