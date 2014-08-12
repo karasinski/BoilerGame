@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="description" />
+  <meta name="keywords" content="tags" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="user-scalable=0, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, minimal-ui=1">
+  <!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #333;
+    }
+    #game {
+      margin: 0 auto;
+    }
+  </style>
+  <title>BoilerGame</title>
+</head>
+
+<body>
+  <div id="game"></div>
+
+  <script src="js/lib/phaser.min.js"></script>
+
+  <script src="js/Boot.js"></script>
+  <script src="js/Preloader.js"></script>
+  <script src="js/MainMenu.js"></script>
+  <script src="js/Leaderboard.js"></script>
+  <script src="js/Instructions.js"></script>
+
+  <script src="js/BoilerGame/Game.js"></script>
+  <script src="js/BoilerGame/UI.js"></script>
+
+  <script>
+    (function() {
+      // initialize the framework
+      var game = new Phaser.Game(960, 640, Phaser.AUTO, 'game');
+      // add game states
+      game.state.add('Boot', BoilerGame.Boot);
+      game.state.add('Preloader', BoilerGame.Preloader);
+      game.state.add('MainMenu', BoilerGame.MainMenu);
+      game.state.add('Leaderboard', BoilerGame.Leaderboard);
+      game.state.add('Instructions', BoilerGame.Instructions);
+      game.state.add('Game', BoilerGame.Game);
+      // start the Boot state
+      game.state.start('Boot');
+    })();
+  </script>
+</body>
+
+</html>
