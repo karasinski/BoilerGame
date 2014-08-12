@@ -1,4 +1,4 @@
-BoilerGame
+BoilerGame v0.9
 ======
 
 This is my attempt at writing a readable example of a complete HTML5 game using the Phaser framework.
