@@ -2,11 +2,14 @@ BoilerGame.Leaderboard = function(game) {};
 
 BoilerGame.Leaderboard.prototype = {
   create: function() {
-    this.game.stage.backgroundColor = '#000';
-    start_x = this.game.width - 100;
-    start_y = 50;
-    backButton = this.add.button(start_x, start_y,
-                                 'btnExit', this.returnToMenu, this, 0, 1, 2);
+    this.game.stage.backgroundColor = '#444';
+
+    x = 325, y = 550;
+    backButton = this.game.add.button(x, y, 'box', this.returnToMenu, this);
+    backButton.scale.setTo(1.5, 0.5);
+
+    backString = "Back"
+    backText = this.game.add.bitmapText(x + 45, y + 15, 'kenpixelblocks', backString, 20);
 
     this.drawLeaderboard();
   },
@@ -19,19 +22,28 @@ BoilerGame.Leaderboard.prototype = {
   // draw a pretty shitty leaderboard
   drawLeaderboard: function() {
     data = BoilerGame.stats.review();
-    scores = Array.apply(null, new Array(5)).map(Number.prototype.valueOf,0);
+    scores = Array.apply(null, new Array(5)).map(Number.prototype.valueOf, 0);
 
     for (i = 0; i < data.length; i++) {
       scores[i] = data[i].score;
     }
 
-    text = "- Leaderboard -\n\n";
+    title = "Leaderboard\n\n";
+    text = "", scoresText = "";
     for (i = 0; i < 5; i++) {
-      text += (i + 1).toString() + '.      ' + scores[i] + '\n';
+      text += (i + 1).toString() + '.\n';
+      scoresText += scores[i] + '\n';
     }
 
-    style = { font: "65px Arial", fill: "#ff0044", align: "center" };
-    t = this.game.add.text(this.game.world.centerX-200, 0, text, style);
+    style = {
+      font: "65px Arial",
+      fill: "#CCC",
+      align: "right"
+    };
+
+    this.game.add.text(this.game.world.centerX -200, 0, title, style);
+    this.game.add.text(325, 150, text, style);
+    this.game.add.text(525, 150, scoresText, style);
   }
 };
 
@@ -89,7 +101,7 @@ BoilerGame.stats = {
     saves = saves.sort(function(a, b) {
       return b.score - a.score
     });
-    
+
     // Should probably remove low scoring games after a while rather than just ignoring them.
     return saves
   }

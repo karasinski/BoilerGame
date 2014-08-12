@@ -15,7 +15,5 @@ You can then navigate to [http://localhost:8080/](http://localhost:8080/) in you
 Todo
 ------
 
-+ Style the leaderboard state
-+ Style the instructions state
 + Add additional comments in code
 + Create gh-pages site with code walkthrough
