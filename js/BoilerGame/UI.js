@@ -87,9 +87,9 @@ var GameOverPanel = function(game, parent) {
     this.game.state.start('Leaderboard');
   }
 
-  this.backButton = this.game.add.button(310, 135, 'box', tryAgain, this);
-  this.backButton.scale.setTo(1.5, 0.5);
-  this.add(this.backButton)
+  this.tryAgainButton = this.game.add.button(310, 135, 'box', tryAgain, this);
+  this.tryAgainButton.scale.setTo(1.5, 0.5);
+  this.add(this.tryAgainButton)
 
   tryAgainString = "Try Again"
   this.tryAgainText = this.game.add.bitmapText(320, 150, 'kenpixelblocks', tryAgainString, 20);

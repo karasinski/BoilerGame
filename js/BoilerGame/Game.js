@@ -6,6 +6,8 @@ BoilerGame.Game = function(game) {};
 
 BoilerGame.Game.prototype = {
   create: function() {
+    BoilerGame.NAME = "BoilerGame-" + Date.now();
+
     // Set background color
     this.game.stage.backgroundColor = '#B4D9E7';
 

@@ -9,7 +9,7 @@ BoilerGame.MainMenu.prototype = {
     // add buttons to start game, view instructions, view leaderboard
     btn_x = BoilerGame.GAME_WIDTH / 2 + 250;
     btn_y = BoilerGame.GAME_HEIGHT / 2 - 50;
-    start_button = this.add.button(btn_x, btn_y, 
+    start_button = this.add.button(btn_x, btn_y,
                                    'btnStart', this.startGame, this, 0, 1, 2);
 
     start_button = this.add.button(btn_x, btn_y + 75,
@@ -21,7 +21,6 @@ BoilerGame.MainMenu.prototype = {
 
   startGame: function() {
     // start the Game state
-    BoilerGame.NAME = "BoilerGame-" + Date.now();
     this.state.start('Game');
   },
 
