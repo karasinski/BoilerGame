@@ -2,6 +2,8 @@ BoilerGame.Preloader = function(game) {
   // define width and height of the game
   BoilerGame.GAME_WIDTH = 720;
   BoilerGame.GAME_HEIGHT = 480;
+
+  // This 'NAME' is used as a unique ID for saved games
   BoilerGame.NAME = "";
 };
 
@@ -9,6 +11,8 @@ BoilerGame.Preloader.prototype = {
   preload: function() {
     // set background color and preload image
     this.stage.backgroundColor = '#333';
+
+    // add a preloader sprite (Phaser just 'does this' for you)
     this.preloadBar = this.add.sprite(BoilerGame.GAME_WIDTH / 2,
                                       BoilerGame.GAME_HEIGHT / 2,
                                       'preloaderBar');

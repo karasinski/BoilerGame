@@ -1,7 +1,11 @@
+// Create our BoilerGame object to hold our important variables
 var BoilerGame = {};
 
+// Create a Boot function in our main game object to hold everything to do with
+// the boot state
 BoilerGame.Boot = function(game) {};
 
+// Prototype this function to add phaser actions preload and create
 BoilerGame.Boot.prototype = {
   preload: function() {
     // preload the loading indicator first before anything else

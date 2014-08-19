@@ -19,7 +19,7 @@ BoilerGame.Instructions.prototype = {
     this.game.state.start('MainMenu');
   },
 
-  // draw a pretty shitty Instructions
+  // draw our Instructions
   drawInstructions: function() {
     text = 'Instructions'
     style = {

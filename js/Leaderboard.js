@@ -19,15 +19,18 @@ BoilerGame.Leaderboard.prototype = {
     this.game.state.start('MainMenu');
   },
 
-  // draw a pretty shitty leaderboard
+  // draw our leaderboard
   drawLeaderboard: function() {
     data = BoilerGame.stats.review();
+
+    // unnecesarrily fancy way of writing: scores = [0, 0, 0, 0, 0]
     scores = Array.apply(null, new Array(5)).map(Number.prototype.valueOf, 0);
 
     for (i = 0; i < data.length; i++) {
       scores[i] = data[i].score;
     }
 
+    // add a lot of text
     title = "Leaderboard\n\n";
     text = "", scoresText = "";
     for (i = 0; i < 5; i++) {
@@ -47,6 +50,7 @@ BoilerGame.Leaderboard.prototype = {
   }
 };
 
+// this module handles the stats (creating, updating, getting)
 BoilerGame.stats = {
   score: 0,
 

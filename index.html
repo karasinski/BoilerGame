@@ -28,6 +28,7 @@
 <body>
   <div id="game"></div>
 
+  <!-- link to all our source files -->
   <script src="js/lib/phaser.min.js"></script>
 
   <script src="js/Boot.js"></script>
@@ -43,6 +44,7 @@
     (function() {
       // initialize the framework
       var game = new Phaser.Game(960, 640, Phaser.AUTO, 'game');
+
       // add game states
       game.state.add('Boot', BoilerGame.Boot);
       game.state.add('Preloader', BoilerGame.Preloader);
@@ -50,6 +52,7 @@
       game.state.add('Leaderboard', BoilerGame.Leaderboard);
       game.state.add('Instructions', BoilerGame.Instructions);
       game.state.add('Game', BoilerGame.Game);
+
       // start the Boot state
       game.state.start('Boot');
     })();

@@ -9,6 +9,8 @@ BoilerGame.MainMenu.prototype = {
     // add buttons to start game, view instructions, view leaderboard
     btn_x = BoilerGame.GAME_WIDTH / 2 + 250;
     btn_y = BoilerGame.GAME_HEIGHT / 2 - 50;
+
+    // add three buttons and their appropriate actions
     start_button = this.add.button(btn_x, btn_y,
                                    'btnStart', this.startGame, this, 0, 1, 2);
 

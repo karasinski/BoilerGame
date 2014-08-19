@@ -1,4 +1,4 @@
-// Pause flag
+// Global pause flag
 var paused = true;
 
 // Create our game unique game state
@@ -6,12 +6,13 @@ BoilerGame.Game = function(game) {};
 
 BoilerGame.Game.prototype = {
   create: function() {
+    // Set our marginally unique id
     BoilerGame.NAME = "BoilerGame-" + Date.now();
 
     // Set background color
     this.game.stage.backgroundColor = '#B4D9E7';
 
-    // Add pause function
+    // Add pause function (when tab blurs)
     this.game.onPause.add(function() {
       this.pauseGame();
     }, this);
@@ -97,10 +98,10 @@ BoilerGame.Game.prototype = {
       this.pausePanel.hide();
       BoilerGame.timer.pause();
 
-      // Anim ground
+      // Animate ground
       this.ground.autoScroll(-100, 0);
 
-      // play the runing animation of the hero
+      // Play the runing animation of the hero
       this.hero.animations.currentAnim.paused = false;
 
       // Activate hero gravity
